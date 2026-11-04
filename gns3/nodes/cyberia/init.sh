@@ -15,6 +15,11 @@ iface eth2 inet static
     netmask 255.255.255.252
 EOF
 
+ip addr flush dev eth0 2>/dev/null
+ip addr add 192.168.122.100/24 dev eth0
+ip link set eth0 up
+ip route replace default via 192.168.122.1 dev eth0
+
 ip addr flush dev eth1 2>/dev/null
 ip addr add 10.64.14.1/25 dev eth1
 ip link set eth1 up
