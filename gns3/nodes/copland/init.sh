@@ -3,34 +3,34 @@
 cat <<EOF > /etc/network/interfaces
 auto eth0
 iface eth0 inet static
-    address 10.64.16.19
+    address 10.64.14.67
     netmask 255.255.255.248
 
 auto eth1
 iface eth1 inet static
-    address 10.64.8.1
+    address 10.64.12.1
     netmask 255.255.254.0
 
 auto eth2
 iface eth2 inet static
-    address 10.64.15.193
+    address 10.64.14.1
     netmask 255.255.255.192
+
 EOF
 
 ip addr flush dev eth0 2>/dev/null
-ip addr add 10.64.16.19/29 dev eth0
+ip addr add 10.64.14.67/29 dev eth0
 ip link set eth0 up
-
 ip addr flush dev eth1 2>/dev/null
-ip addr add 10.64.8.1/23 dev eth1
+ip addr add 10.64.12.1/23 dev eth1
 ip link set eth1 up
-
 ip addr flush dev eth2 2>/dev/null
-ip addr add 10.64.15.193/26 dev eth2
+ip addr add 10.64.14.1/26 dev eth2
 ip link set eth2 up
 
 sysctl -w net.ipv4.ip_forward=1
-ip route replace default via 10.64.16.17
+
+ip route replace default via 10.64.14.65
 
 cat <<EOF > /etc/resolv.conf
 nameserver 192.168.122.1
